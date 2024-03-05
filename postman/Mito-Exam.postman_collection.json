@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "25ca289d-26af-480d-bbb6-c94f4a92b613",
+		"name": "Mito-Exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6370137"
+	},
+	"item": [
+		{
+			"name": "Save Student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jorge\",\r\n    \"lastName\": \"Palacios\",\r\n    \"dni\": \"65823214\",\r\n    \"age\": 39\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read all Students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/students/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jose\",\r\n    \"lastName\": \"Palacios\",\r\n    \"dni\": \"76453454\",\r\n    \"age\": 28\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/students/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/students/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Razonamiento Matemático\",\r\n    \"acronym\": \"RM\",\r\n    \"status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/courses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read all Courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/courses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/courses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Course",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lenguaje\",\r\n    \"acronym\": \"LEN\",\r\n    \"status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/courses/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courses",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Course",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/courses/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courses",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Enrollment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"student\": {\r\n        \"idStudent\": 8,\r\n        \"name\": \"Jorge\",\r\n        \"lastName\": \"Palacios\",\r\n        \"dni\": \"65823214\",\r\n        \"age\": 39\r\n    },\r\n    \"dateEnrollment\": \"2024-03-04T15:53:16\",\r\n    \"status\": true,\r\n    \"details\": [\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 1,\r\n                \"name\": \"Matemática\",\r\n                \"acronym\": \"MAT\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        },\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 3,\r\n                \"name\": \"Lenguaje\",\r\n                \"acronym\": \"LEN\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        },\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 4,\r\n                \"name\": \"Historia\",\r\n                \"acronym\": \"HIS\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        },\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 5,\r\n                \"name\": \"Química\",\r\n                \"acronym\": \"QUI\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        },\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 6,\r\n                \"name\": \"Geografía\",\r\n                \"acronym\": \"GEO\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        },\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 7,\r\n                \"name\": \"Razonamiento Verbal\",\r\n                \"acronym\": \"RV\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        },\r\n        {\r\n            \"course\": {\r\n                \"idCourse\": 8,\r\n                \"name\": \"Razonamiento Matemático\",\r\n                \"acronym\": \"RM\",\r\n                \"status\": true\r\n            },\r\n            \"classroom\": \"A\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/enrollment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enrollment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read all Enrollment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/enrollment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enrollment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read all Students Order By Age",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/students/order/age",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students",
+						"order",
+						"age"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Enrollment By Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/enrollment/course",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enrollment",
+						"course"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
