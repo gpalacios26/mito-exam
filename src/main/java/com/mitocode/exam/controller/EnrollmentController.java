@@ -58,6 +58,12 @@ public class EnrollmentController {
         return ResponseEntity.ok(byCourse);
     }
 
+    @GetMapping("/course2")
+    public ResponseEntity<Map<String, List<String>>> readStudentsGroupByEnrollmentCourse2() throws Exception{
+        Map<String, List<String>> byCourse = service.getStudentsGroupByEnrollmentCourse2();
+        return ResponseEntity.ok(byCourse);
+    }
+
     private EnrollmentDTO convertToDto(Enrollment obj){
         return modelMapper.map(obj, EnrollmentDTO.class);
     }

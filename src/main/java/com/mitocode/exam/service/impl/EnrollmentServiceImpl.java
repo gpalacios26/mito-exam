@@ -8,10 +8,7 @@ import com.mitocode.exam.service.IEnrollmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -43,5 +40,27 @@ public class EnrollmentServiceImpl extends CRUDImpl<Enrollment, Integer> impleme
                         Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new
                 ));
+    }
+
+    @Override
+    public Map<String, List<String>> getStudentsGroupByEnrollmentCourse2() {
+        Stream<Enrollment> enrollmentStream = repository.findAll().stream();
+        Stream<List<EnrollmentDetail>> listDetailsStream = enrollmentStream.map(Enrollment::getDetails);
+
+        Stream<EnrollmentDetail> detailStream = listDetailsStream.flatMap(Collection::stream);
+        Map<String, Map<String, Long>> byCourse = detailStream.collect(groupingBy(d -> {
+            return d.getCourse().getName();
+        }, groupingBy(dd -> dd.getEnrollment().getStudent().getName(), counting())));
+
+        Map<String, List<String>> byCourse2 = new HashMap<String, List<String>>();
+        byCourse.forEach((key, value) -> {
+            List<String> listValues = new ArrayList<String>();
+            value.forEach((key2, value2) -> {
+                listValues.add(key2);
+            });
+            byCourse2.put(key, listValues);
+        });
+
+        return byCourse2;
     }
 }

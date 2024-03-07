@@ -325,6 +325,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Read Enrollment By Course V2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/enrollment/course2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"enrollment",
+						"course2"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
