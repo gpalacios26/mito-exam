@@ -1,10 +1,10 @@
 package com.mitocode.exam.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mitocode.exam.dto.CourseDTO;
+import com.mitocode.exam.dto.StudentDTO;
 import com.mitocode.exam.exception.ModelNotFoundException;
-import com.mitocode.exam.model.Course;
-import com.mitocode.exam.service.ICourseService;
+import com.mitocode.exam.model.Student;
+import com.mitocode.exam.service.IStudentService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
@@ -26,14 +26,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc(addFilters = false)
-@WebMvcTest(CourseControllerTest.class)
-class CourseControllerTest {
+@WebMvcTest(StudentControllerTest.class)
+class StudentControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ICourseService service;
+    private IStudentService service;
 
     @MockBean
     private ModelMapper modelMapper;
@@ -41,22 +41,22 @@ class CourseControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    Course COURSE_1 = new Course(1, "Matemática", "MAT", true);
-    Course COURSE_2 = new Course(2, "Lenguaje", "LEN", true);
+    Student STUDENT_1 = new Student(1, "Gregory", "Palacios", "47896514", 32);
+    Student STUDENT_2 = new Student(2, "Ernesto", "Medina", "58745869", 24);
 
-    CourseDTO COURSE_DTO_1 = new CourseDTO(1, "Matemática", "MAT", true);
-    CourseDTO COURSE_DTO_2 = new CourseDTO(2, "Lenguaje", "LEN", true);
+    StudentDTO STUDENT_DTO_1 = new StudentDTO(1, "Gregory", "Palacios", "47896514", 32);
+    StudentDTO STUDENT_DTO_2 = new StudentDTO(2, "Ernesto", "Medina", "58745869", 24);
 
     @Test
     void readAllTest() throws Exception {
-        List<Course> courses = List.of(COURSE_1, COURSE_2);
+        List<Student> students = List.of(STUDENT_1, STUDENT_2);
 
-        Mockito.when(service.readAll()).thenReturn(courses);
-        Mockito.when(modelMapper.map(COURSE_1, CourseDTO.class)).thenReturn(COURSE_DTO_1);
-        Mockito.when(modelMapper.map(COURSE_2, CourseDTO.class)).thenReturn(COURSE_DTO_2);
+        Mockito.when(service.readAll()).thenReturn(students);
+        Mockito.when(modelMapper.map(STUDENT_1, StudentDTO.class)).thenReturn(STUDENT_DTO_1);
+        Mockito.when(modelMapper.map(STUDENT_2, StudentDTO.class)).thenReturn(STUDENT_DTO_2);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/courses")
+                        .get("/students")
                         .content(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)));
@@ -66,25 +66,25 @@ class CourseControllerTest {
     void readByIdTest() throws Exception {
         final int ID = 1;
 
-        Mockito.when(service.readById(any())).thenReturn(COURSE_1);
-        Mockito.when(modelMapper.map(COURSE_1, CourseDTO.class)).thenReturn(COURSE_DTO_1);
+        Mockito.when(service.readById(any())).thenReturn(STUDENT_1);
+        Mockito.when(modelMapper.map(STUDENT_1, StudentDTO.class)).thenReturn(STUDENT_DTO_1);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/courses/" + ID)
+                        .get("/students/" + ID)
                         .content(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("Matemática")));
+                .andExpect(jsonPath("$.name", is("Gregory")));
     }
 
     @Test
     void createTest() throws Exception {
-        Mockito.when(service.save(any())).thenReturn(COURSE_2);
-        Mockito.when(modelMapper.map(COURSE_2, CourseDTO.class)).thenReturn(COURSE_DTO_2);
+        Mockito.when(service.save(any())).thenReturn(STUDENT_2);
+        Mockito.when(modelMapper.map(STUDENT_2, StudentDTO.class)).thenReturn(STUDENT_DTO_2);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-                .post("/courses")
+                .post("/students")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(COURSE_DTO_2));
+                .content(objectMapper.writeValueAsString(STUDENT_DTO_2));
 
         mockMvc.perform(mockRequest)
                 .andExpect(status().isCreated())
@@ -95,17 +95,17 @@ class CourseControllerTest {
     void updateTest() throws Exception {
         final int ID = 2;
 
-        Mockito.when(service.update(any(), any())).thenReturn(COURSE_2);
-        Mockito.when(modelMapper.map(COURSE_2, CourseDTO.class)).thenReturn(COURSE_DTO_2);
+        Mockito.when(service.update(any(), any())).thenReturn(STUDENT_2);
+        Mockito.when(modelMapper.map(STUDENT_2, StudentDTO.class)).thenReturn(STUDENT_DTO_2);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-                .put("/courses/" + ID)
+                .put("/students/" + ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(COURSE_DTO_2));
+                .content(objectMapper.writeValueAsString(STUDENT_DTO_2));
 
         mockMvc.perform(mockRequest)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("Lenguaje")));
+                .andExpect(jsonPath("$.name", is("Ernesto")));
     }
 
     @Test
@@ -115,9 +115,9 @@ class CourseControllerTest {
         Mockito.doThrow(new ModelNotFoundException("ID NOT FOUND: " + ID)).when(service).update(any(), any());
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
-                .put("/courses/" + ID)
+                .put("/students/" + ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(COURSE_DTO_2));
+                .content(objectMapper.writeValueAsString(STUDENT_DTO_2));
 
         mockMvc.perform(mockRequest)
                 .andExpect(status().isNotFound());
@@ -128,7 +128,7 @@ class CourseControllerTest {
         final int ID = 1;
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/courses/" + ID)
+                        .delete("/students/" + ID)
                         .content(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNoContent());
     }
@@ -140,8 +140,23 @@ class CourseControllerTest {
         Mockito.doThrow(new ModelNotFoundException("ID NOT FOUND: " + ID)).when(service).delete(ID);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/courses/" + ID)
+                        .delete("/students/" + ID)
                         .content(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void readAllStudentsOrderByAgeTest() throws Exception {
+        List<Student> students = List.of(STUDENT_1, STUDENT_2);
+
+        Mockito.when(service.getStudentsOrderByAgeDesc()).thenReturn(students);
+        Mockito.when(modelMapper.map(STUDENT_1, StudentDTO.class)).thenReturn(STUDENT_DTO_1);
+        Mockito.when(modelMapper.map(STUDENT_2, StudentDTO.class)).thenReturn(STUDENT_DTO_2);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/students/order/age")
+                        .content(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 }
