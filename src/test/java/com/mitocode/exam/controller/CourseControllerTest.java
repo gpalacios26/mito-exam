@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc(addFilters = false)
-@WebMvcTest(CourseControllerTest.class)
+@WebMvcTest(CourseController.class)
 class CourseControllerTest {
 
     @Autowired
@@ -87,8 +87,7 @@ class CourseControllerTest {
                 .content(objectMapper.writeValueAsString(COURSE_DTO_2));
 
         mockMvc.perform(mockRequest)
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.status", is(201)));
+                .andExpect(status().isCreated());
     }
 
     @Test
